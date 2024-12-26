@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { FloatLabel } from 'primeng/floatlabel';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	ReactiveFormsModule,
+	Validators,
+} from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
 import { Button } from 'primeng/button';
 
@@ -11,10 +17,14 @@ import { Button } from 'primeng/button';
 	styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
-	loginForm = new FormGroup({
-		email: new FormControl(''),
-		password: new FormControl(''),
-	});
+	loginForm: FormGroup;
+
+	constructor(private formBuilder: FormBuilder) {
+		this.loginForm = this.formBuilder.group({
+			email: ['', [Validators.required, Validators.email]],
+			password: ['', [Validators.required, Validators.minLength(6)]],
+		});
+	}
 
 	onSubmit() {
 		console.log(this.loginForm.value);
