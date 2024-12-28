@@ -1,22 +1,26 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { CognitoService } from './cognito.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
 	constructor(
-		private authService: AuthService,
+		private cognitoService: CognitoService,
 		private router: Router
 	) {}
 
-	canActivate(): boolean {
-		if (this.authService.isLoggedIn()) {
-			return true; // User is logged in, access granted
-		} else {
-			this.router.navigate(['/login']); // Redirect to login page
-			return false; // Access denied
+	async canActivate(): Promise<boolean> {
+		try {
+			const isLoggedIn = await this.cognitoService.isUserSignedIn();
+			if (isLoggedIn) {
+				return true;
+			}
+		} catch (error) {
+			console.error('AuthGuard error:', error);
 		}
+		this.router.navigate(['/login']);
+		return false;
 	}
 }
