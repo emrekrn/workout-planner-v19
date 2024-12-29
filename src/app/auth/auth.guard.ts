@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { CognitoService } from './cognito.service';
+import { first, firstValueFrom } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -12,15 +13,14 @@ export class AuthGuard implements CanActivate {
 	) {}
 
 	async canActivate(): Promise<boolean> {
-		try {
-			const isLoggedIn = await this.cognitoService.isUserSignedIn();
-			if (isLoggedIn) {
-				return true;
-			}
-		} catch (error) {
-			console.error('AuthGuard error:', error);
+		const isUserSignedIn = await firstValueFrom(
+			this.cognitoService.isUserSignedIn
+		);
+		if (isUserSignedIn) {
+			return true;
+		} else {
+			this.router.navigate(['/login']);
+			return false;
 		}
-		this.router.navigate(['/login']);
-		return false;
 	}
 }

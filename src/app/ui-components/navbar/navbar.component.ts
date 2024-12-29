@@ -27,6 +27,6 @@ export class NavbarComponent {
 	}
 
 	handleSignOut() {
-		this.cognitoService.signOut().then((r) => this.router.navigate(['/login']));
+		this.cognitoService.signOut();
 	}
 }

@@ -34,16 +34,8 @@ export class LoginPageComponent implements OnInit {
 	onSubmit() {
 		const email: string = this.loginForm.controls['email'].value;
 		const password: string = this.loginForm.controls['password'].value;
-		this.cognitoService.signIn(email, password).then((isUserSignedIn) => {
-			this.router.navigate(['/dashboard']);
-		});
+		this.cognitoService.signIn(email, password);
 	}
 
-	async ngOnInit() {
-		await this.cognitoService.isUserSignedIn().then((isUserSignedIn) => {
-			if (isUserSignedIn) {
-				this.router.navigate(['/dashboard']);
-			}
-		});
-	}
+	ngOnInit() {}
 }

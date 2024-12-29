@@ -13,6 +13,6 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {}
 
 	getUser() {
-		console.log(this.cognitoService.userGroups);
+		console.log(this.cognitoService.userGroups.getValue());
 	}
 }
