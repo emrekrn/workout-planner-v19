@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Button } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
 import {
 	FormBuilder,
 	FormGroup,
+	FormsModule,
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
-import { Button } from 'primeng/button';
 import { CognitoService } from '../../auth/cognito.service';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
-	selector: 'app-login-page',
-	imports: [FloatLabel, InputText, Button, ReactiveFormsModule, RouterOutlet],
-	templateUrl: './login-page.component.html',
-	styleUrl: './login-page.component.scss',
+	selector: 'app-login-form',
+	imports: [Button, FloatLabel, FormsModule, InputText, ReactiveFormsModule],
+	templateUrl: './login-form.component.html',
+	styleUrl: './login-form.component.scss',
 })
-export class LoginPageComponent implements OnInit {
+export class LoginFormComponent {
 	loginForm: FormGroup;
 
 	constructor(
@@ -36,6 +37,4 @@ export class LoginPageComponent implements OnInit {
 		const password: string = this.loginForm.controls['password'].value;
 		this.cognitoService.signIn(email, password);
 	}
-
-	ngOnInit() {}
 }

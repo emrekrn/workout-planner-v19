@@ -1,5 +1,11 @@
-import { Injectable, signal } from '@angular/core';
-import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
+import { Injectable } from '@angular/core';
+import {
+	signIn,
+	signOut,
+	getCurrentUser,
+	signUp,
+	confirmSignUp,
+} from 'aws-amplify/auth';
 import { Amplify } from 'aws-amplify';
 import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito';
 import { environment } from '../../environments/environment';
@@ -71,6 +77,26 @@ export class CognitoService {
 	signOut() {
 		signOut().then(() => {
 			this.isUserSignedIn.next(false);
+		});
+	}
+
+	signUp(firstName: string, lastName: string, email: string, password: string) {
+		return signUp({
+			username: email,
+			password: password,
+			options: {
+				userAttributes: {
+					email: email,
+					name: firstName,
+					family_name: lastName,
+				},
+			},
+		});
+	}
+	confirmSignUp(username: string, confirmationCode: string) {
+		return confirmSignUp({
+			username: username,
+			confirmationCode: confirmationCode,
 		});
 	}
 }

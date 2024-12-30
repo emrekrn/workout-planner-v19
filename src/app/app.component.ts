@@ -23,8 +23,6 @@ export class AppComponent implements OnInit, OnDestroy {
 			(isSignedIn) => {
 				if (isSignedIn) {
 					this.router.navigate(['/dashboard']); // Navigate after signing in
-				} else {
-					this.router.navigate(['/login']); // Navigate after signing out
 				}
 			}
 		);

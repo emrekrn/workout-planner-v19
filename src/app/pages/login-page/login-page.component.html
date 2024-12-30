@@ -7,7 +7,7 @@
 		/>
 	</div>
 	<div class="flex w-1/2 items-center justify-center">
-		<div class="flex w-4/6 flex-col gap-5">
+		<div class="flex w-4/6 flex-col">
 			<div>
 				<img
 					src="assets/images/workout-planner.png"
@@ -15,59 +15,7 @@
 					class="h-auto w-full"
 				/>
 			</div>
-			<h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight">
-				Sign in to your account
-			</h2>
-			<form
-				class="flex flex-col gap-5"
-				[formGroup]="loginForm"
-				(submit)="onSubmit()"
-			>
-				<p-floatlabel variant="on">
-					<input
-						pInputText
-						id="email"
-						autocomplete="off"
-						class="w-full"
-						type="email"
-						formControlName="email"
-					/>
-					<label for="email">Email</label>
-				</p-floatlabel>
-
-				<div>
-					<p-floatlabel variant="on">
-						<input
-							pInputText
-							id="password"
-							autocomplete="off"
-							class="w-full"
-							type="password"
-							formControlName="password"
-						/>
-						<label for="password">Password</label>
-					</p-floatlabel>
-					<div class="flex justify-end text-sm">
-						<a
-							href="#"
-							class="mt-2 font-semibold text-indigo-600 hover:text-indigo-500"
-							>Forgot password?</a
-						>
-					</div>
-				</div>
-
-				<p-button
-					type="submit"
-					label="Sign in"
-					class="flex w-full justify-center"
-				/>
-			</form>
-			<div class="flex justify-center text-xs">
-				<p>Don't have an account yet?</p>
-				<a class="mx-2 text-indigo-400 hover:text-indigo-200" href="#">
-					Create an account
-				</a>
-			</div>
+			<router-outlet></router-outlet>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,23 @@
+<div class="mt-5 flex flex-col gap-5">
+	<form class="flex flex-col gap-5" (submit)="onSubmit()">
+		<div class="flex gap-2">
+			<p-floatlabel variant="on" class="w-full">
+				<input
+					pInputText
+					id="registrationCode"
+					autocomplete="off"
+					class="w-full"
+					type="text"
+					[formControl]="registrationCode"
+				/>
+				<label for="registrationCode">Registration Code</label>
+			</p-floatlabel>
+		</div>
+
+		<p-button
+			type="submit"
+			label="Confirm"
+			class="flex w-full justify-center"
+		/>
+	</form>
+</div>
