@@ -10,11 +10,18 @@ import {
 } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
 import { CognitoService } from '../../auth/cognito.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'app-login-form',
-	imports: [Button, FloatLabel, FormsModule, InputText, ReactiveFormsModule],
+	imports: [
+		Button,
+		FloatLabel,
+		FormsModule,
+		InputText,
+		ReactiveFormsModule,
+		RouterLink,
+	],
 	templateUrl: './login-form.component.html',
 	styleUrl: './login-form.component.scss',
 })
@@ -23,8 +30,7 @@ export class LoginFormComponent {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private cognitoService: CognitoService,
-		private router: Router
+		private cognitoService: CognitoService
 	) {
 		this.loginForm = this.formBuilder.group({
 			email: ['', [Validators.required, Validators.email]],
