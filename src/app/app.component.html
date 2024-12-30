@@ -1,1 +1,6 @@
-<router-outlet />
+<div class="flex">
+	@if (cognitoService.isUserSignedIn | async) {
+		<app-navbar></app-navbar>
+	}
+	<router-outlet />
+</div>

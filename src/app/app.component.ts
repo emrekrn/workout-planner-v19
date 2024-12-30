@@ -2,10 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CognitoService } from './auth/cognito.service';
+import { AsyncPipe } from '@angular/common';
+import { NavbarComponent } from './ui-components/navbar/navbar.component';
 
 @Component({
 	selector: 'app-root',
-	imports: [RouterOutlet],
+	imports: [RouterOutlet, AsyncPipe, NavbarComponent],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
 })
@@ -13,7 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	private subscription: Subscription | null = null;
 
 	constructor(
-		private cognitoService: CognitoService,
+		public cognitoService: CognitoService,
 		private router: Router
 	) {}
 
@@ -23,6 +25,8 @@ export class AppComponent implements OnInit, OnDestroy {
 			(isSignedIn) => {
 				if (isSignedIn) {
 					this.router.navigate(['/dashboard']); // Navigate after signing in
+				} else {
+					this.router.navigate(['/']);
 				}
 			}
 		);

@@ -1,30 +1,16 @@
 import { Component, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
 import { CognitoService } from '../../auth/cognito.service';
-import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
 	selector: 'app-navbar',
-	imports: [NgClass],
+	imports: [Tooltip, RouterLink],
 	templateUrl: './navbar.component.html',
 	styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-	showMobileMenu = signal(false);
-	showUserMenu = signal(false);
-
-	constructor(
-		private cognitoService: CognitoService,
-		private router: Router
-	) {}
-
-	toggleMobileMenu() {
-		this.showMobileMenu.update((state) => !state);
-	}
-
-	toggleUserMenu() {
-		this.showUserMenu.update((state) => !state);
-	}
+	constructor(private cognitoService: CognitoService) {}
 
 	handleSignOut() {
 		this.cognitoService.signOut();
